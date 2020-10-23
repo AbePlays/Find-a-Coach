@@ -1,5 +1,10 @@
 <template>
-  <div></div>
+  <section>
+    <div class="controls">
+      <button>Refresh</button>
+      <router-link to="/regsiter">Register as a Coach</router-link>
+    </div>
+  </section>
 </template>
 
 <script>
