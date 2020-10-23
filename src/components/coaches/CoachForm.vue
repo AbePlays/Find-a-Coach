@@ -1,12 +1,12 @@
 <template>
   <form @submit.prevent="submitForm">
     <div class="form-control">
-      <label for="firstName">First Name</label>
-      <input type="text" id="firstName" v-model.trim="firstName" />
+      <label for="firstname">First Name</label>
+      <input type="text" id="firstname" v-model.trim="firstName" />
     </div>
     <div class="form-control">
-      <label for="lasyName">Last Name</label>
-      <input type="text" id="lastName" v-model.trim="lastName" />
+      <label for="lasyname">Last Name</label>
+      <input type="text" id="lastname" v-model.trim="lastName" />
     </div>
     <div class="form-control">
       <label for="description">Description</label>
@@ -19,15 +19,20 @@
     <div class="form-control">
       <h3>Areas of Expertise</h3>
       <div>
-        <input type="checkbox" id="frontend" value="frontend" v-model="areas" />
+        <input
+          type="checkbox"
+          id="frontend"
+          value="frontend"
+          v-model="frontend"
+        />
         <label for="frontend">Frontend Development</label>
       </div>
       <div>
-        <input type="checkbox" id="backend" value="backend" v-model="areas" />
+        <input type="checkbox" id="backend" value="backend" v-model="backend" />
         <label for="backend">Backend Development</label>
       </div>
       <div>
-        <input type="checkbox" id="career" value="career" v-model="areas" />
+        <input type="checkbox" id="career" value="career" v-model="career" />
         <label for="career">Career Development</label>
       </div>
     </div>
@@ -38,25 +43,40 @@
 
 <script>
 export default {
+  emits: ["save-data"],
   date() {
     return {
       firstName: "",
       lastName: "",
       description: "",
       rate: null,
-      areas: [],
+      frontend: false,
+      backend: false,
+      career: false,
     };
   },
   methods: {
     submitForm() {
+      var areas = [];
+      if (this.frontend === true) {
+        areas.push("frontend");
+      }
+      if (this.backend === true) {
+        areas.push("backend");
+      }
+      if (this.career === true) {
+        areas.push("career");
+      }
+
       const formData = {
         first: this.firstName,
         last: this.lastName,
         desc: this.description,
         rate: this.rate,
-        areas: this.areas,
+        areas,
       };
       console.log(formData);
+      this.$emit("save-data", formData);
     },
   },
 };
