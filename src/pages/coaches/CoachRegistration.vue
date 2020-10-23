@@ -16,8 +16,8 @@ export default {
   },
   methods: {
     saveData(data) {
-      console.log(data);
       this.$store.dispatch("coaches/registerCoach", data);
+      this.$router.replace("/coaches");
     },
   },
 };
