@@ -9,8 +9,10 @@ export default {
       areas: data.areas,
     };
 
+    const token = context.rootGetters.token;
+
     const res = await fetch(
-      `https://xkcd-rn.firebaseio.com/coaches/${id}.json`,
+      `https://xkcd-rn.firebaseio.com/coaches/${id}.json?auth=` + token,
       {
         method: "PUT",
         body: JSON.stringify(coachData),
