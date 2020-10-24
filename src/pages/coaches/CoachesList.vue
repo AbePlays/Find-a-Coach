@@ -1,35 +1,37 @@
 <template>
-  <base-dialog :show="!!error" title="An Error Ocurred" @close="handleError">
-    <p>{{ error }}</p>
-  </base-dialog>
-  <coach-filter @change-filter="setFilters" />
-  <section>
-    <base-card>
-      <div class="controls">
-        <base-button mode="outline" link @click="loadCoaches"
-          >Refresh</base-button
-        >
-        <base-button link to="/register" v-if="!isCoach && !isLoading"
-          >Register as a Coach</base-button
-        >
-      </div>
-      <div v-if="isLoading">
-        <base-spinner></base-spinner>
-      </div>
-      <ul v-else-if="hasCoaches">
-        <coach-item
-          v-for="coach in filteredCoaches"
-          :key="coach.id"
-          :id="coach.id"
-          :areas="coach.areas"
-          :firstName="coach.firstName"
-          :lastName="coach.lastName"
-          :rate="coach.hourlyRate"
-        />
-      </ul>
-      <h3 v-else>No coaches found.</h3>
-    </base-card>
-  </section>
+  <div>
+    <base-dialog :show="!!error" title="An Error Ocurred" @close="handleError">
+      <p>{{ error }}</p>
+    </base-dialog>
+    <coach-filter @change-filter="setFilters" />
+    <section>
+      <base-card>
+        <div class="controls">
+          <base-button mode="outline" link @click="loadCoaches"
+            >Refresh</base-button
+          >
+          <base-button link to="/register" v-if="!isCoach && !isLoading"
+            >Register as a Coach</base-button
+          >
+        </div>
+        <div v-if="isLoading">
+          <base-spinner></base-spinner>
+        </div>
+        <ul v-else-if="hasCoaches">
+          <coach-item
+            v-for="coach in filteredCoaches"
+            :key="coach.id"
+            :id="coach.id"
+            :areas="coach.areas"
+            :firstName="coach.firstName"
+            :lastName="coach.lastName"
+            :rate="coach.hourlyRate"
+          />
+        </ul>
+        <h3 v-else>No coaches found.</h3>
+      </base-card>
+    </section>
+  </div>
 </template>
 
 <script>
